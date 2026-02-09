@@ -1,0 +1,11 @@
+audio_id,reference,hypothesis,wer,cer,ser,semantic_similarity
+Kiswa-00001,"Mithali za Sulemani,Mlango wa kwanza, Mitahli za Suleimani",midhali za sulemani mlango wa kwanza mithali za sulemani,0.3333333333333333,0.07017543859649122,0.14082885,0.85917115
+Kiswa-00002,"mwana wa Daudi, mfalme wa Israeli.Kujua hekima na adabu;",mwanawadaudi mfalme israeli kujuahekima na adabu,0.6,0.1111111111111111,0.1162473,0.8837527
+Kiswa-00003,kutambua maneno ya ufahamu;kufundishwa matendo ya busara,kutambua maneno ya ufahamu kufundishwa matendo ya busara,0.0,0.0,0.016917467,0.98308253
+Kiswa-00004,"katika haki na hukumu na adili.Kuwapa wajinga werevu, na kijana maarifa na hadhari;mwenye hekima asikie na kuongezewa elimu,",katika haki na hukumu na adili kuwapa wajinga wirefu na kijana maarifa na hadhari mwenye hekima hasikae na kuongezewa elimu,0.1,0.03278688524590164,0.10578871,0.8942113
+Kiswa-00005,"na mwenye ufahamu ayafikie mashauri yenye njia.Kufahamu mithali na kitendawili,",na mwenye ufahamu hayafikie mashauri yenye njia kufahamu mithali na kitendawili,0.09090909090909091,0.01282051282051282,0.11451924,0.88548076
+Kiswa-00006,"na maneno ya wenye hekima na mafumbo yao.Kumcha Bwana ni chanzo cha maarifa, Bali wapumbavu hudharau hekima na adabu.Mwanangu",na maneno ya wenye hekima na mafumbo yao kumchabwana ni chanzo cha maarifa baliwapumbavu hudharau hekima na adabu mwanangu,0.19047619047619047,0.016129032258064516,0.0788368,0.9211632
+Kiswa-00007,"yasikilize mafundisho ya baba yako, Wala usiiache sheria ya mama yako,Kwa maana hayo yatakuwa kilemba cha neema kichwani pako, Na mikufu shingoni mwako. Mwanangu,",yasikilize mafundisho wa baba yako wala usiache sheria mama yako kwa maana hayo yatakuwa kilemba cha neyema kichuani pako na mikufu shingoni mwako mwanangu,0.2,0.04430379746835443,0.063393,0.936607
+Kiswa-00008,"wenye dhambi wakikushawishi, Wewe usikubali.",wenye dhambe wa kikushawishi uwewe usikubali,0.8,0.07142857142857142,0.23530096,0.76469904
+Kiswa-00009,"Wakisema, Haya! Njoo pamoja nasi, Na tuvizie ili kumwaga damu;",wakisema haya njoo pamojanasi na tufizie ili kumwagadamu,0.5,0.05172413793103448,0.18179965,0.81820035
+Kiswa-00010,"Tumwotee asiye na hatia, bila sababu;",tumte asiyena hatiya bila sababu,0.6666666666666666,0.14285714285714285,0.22526526,0.77473474
