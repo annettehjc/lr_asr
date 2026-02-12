@@ -1,0 +1,101 @@
+audio_id,digit,gender,reference,greedy_hyp,lm_hyp,wer_greedy,cer_greedy,wer_lm,cer_lm
+4_speaker28_1.wav.wav,4,female,nne,kumi nele,kumi dee,2.0,2.3333333333333335,2.0,2.3333333333333335
+3_speaker6_7.wav.wav,3,female,tatu,tagi,rangi,1.0,0.5,1.0,1.0
+5_speaker28_8.wav.wav,5,female,tano,amu,ami,1.0,0.75,1.0,0.75
+1_speaker4_6.wav.wav,1,male,moja,moja,moja,0.0,0.0,0.0,0.0
+8_speaker21_5.wav.wav,8,female,nane,nane,nane,0.0,0.0,0.0,0.0
+8_speaker6_8.wav.wav,8,female,nane,mani,mbali,1.0,0.5,1.0,1.0
+3_speaker2_4.wav.wav,3,female,tatu,tatu,tatu,0.0,0.0,0.0,0.0
+9_speaker5_0.wav.wav,9,male,tisa,kiza,kizani,1.0,0.5,1.0,1.0
+5_speaker8_4.wav.wav,5,male,tano,anu,au,1.0,0.5,1.0,0.75
+0_speaker21_2.wav.wav,0,female,sifuri,ifuri,sifuri,1.0,0.16666666666666666,0.0,0.0
+8_speaker25_8.wav.wav,8,male,nane,daane,nane,1.0,0.5,0.0,0.0
+5_speaker16_2.wav.wav,5,male,tano,tano,tano,0.0,0.0,0.0,0.0
+5_speaker13_2.wav.wav,5,female,tano,tano,tano,0.0,0.0,0.0,0.0
+3_speaker3_1.wav.wav,3,female,tatu,anna tu,sana na tu,2.0,1.0,3.0,1.75
+0_speaker9_9.wav.wav,0,female,sifuri,likkaa,kula,1.0,0.8333333333333334,1.0,0.8333333333333334
+3_speaker19_6.wav.wav,3,male,tatu,tatu,tatu,0.0,0.0,0.0,0.0
+3_speaker27_8.wav.wav,3,male,tatu,atu,tatu,1.0,0.25,0.0,0.0
+5_speaker8_2.wav.wav,5,male,tano,anu,tano,1.0,0.5,0.0,0.0
+2_speaker9_2.wav.wav,2,female,mbili,alikita,aliita,1.0,1.0,1.0,1.0
+5_speaker21_0.wav.wav,5,female,tano,tano,tano,0.0,0.0,0.0,0.0
+3_speaker16_2.wav.wav,3,male,tatu,hatu,hatu,1.0,0.25,1.0,0.25
+1_speaker4_4.wav.wav,1,male,moja,ode,oda,1.0,0.75,1.0,0.5
+8_speaker19_4.wav.wav,8,male,nane,nane,nane,0.0,0.0,0.0,0.0
+4_speaker30_6.wav.wav,4,male,nne,nyule,yule,1.0,1.0,1.0,1.0
+7_speaker15_2.wav.wav,7,male,saba,aba,ama,1.0,0.25,1.0,0.5
+0_speaker11_6.wav.wav,0,male,sifuri,ifuri,vuli,1.0,0.16666666666666666,1.0,0.6666666666666666
+7_speaker18_4.wav.wav,7,male,saba,pamba,pamba,1.0,0.5,1.0,0.5
+3_speaker29_0.wav.wav,3,female,tatu,anki,tanki,1.0,1.0,1.0,0.75
+0_speaker4_1.wav.wav,0,male,sifuri,ishune,shule,1.0,0.8333333333333334,1.0,0.6666666666666666
+9_speaker29_3.wav.wav,9,female,tisa,tisa,tisa,0.0,0.0,0.0,0.0
+6_speaker27_6.wav.wav,6,male,sita,sita,sita,0.0,0.0,0.0,0.0
+0_speaker12_8.wav.wav,0,male,sifuri,uri,ule,1.0,0.5,1.0,0.8333333333333334
+9_speaker22_3.wav.wav,9,male,tisa,tisa,tisa,0.0,0.0,0.0,0.0
+7_speaker11_0.wav.wav,7,male,saba,arabu,arabuni,1.0,0.75,1.0,1.25
+3_speaker4_9.wav.wav,3,male,tatu,tun,tu na,1.0,0.75,2.0,1.0
+1_speaker22_6.wav.wav,1,male,moja,moja,moja,0.0,0.0,0.0,0.0
+3_speaker5_4.wav.wav,3,male,tatu,atu,a tu,1.0,0.25,2.0,0.5
+2_speaker1_4.wav.wav,2,male,mbili,mbili,mbili,0.0,0.0,0.0,0.0
+4_speaker4_7.wav.wav,4,male,nne,e,a,1.0,0.6666666666666666,1.0,1.0
+6_speaker29_7.wav.wav,6,female,sita,sita,sita,0.0,0.0,0.0,0.0
+6_speaker24_7.wav.wav,6,male,sita,ita,taa,1.0,0.25,1.0,0.75
+6_speaker16_7.wav.wav,6,male,sita,sinte,inter,1.0,0.5,1.0,1.0
+0_speaker1_4.wav.wav,0,male,sifuri,sifuri,sifuri,0.0,0.0,0.0,0.0
+0_speaker22_8.wav.wav,0,male,sifuri,hstori,stori,1.0,0.6666666666666666,1.0,0.5
+2_speaker14_2.wav.wav,2,female,mbili,mbeleni,mbele nia,1.0,0.6,2.0,1.0
+4_speaker14_0.wav.wav,4,female,nne,le,ni,1.0,0.6666666666666666,1.0,0.6666666666666666
+1_speaker26_7.wav.wav,1,male,moja,moja,moja,0.0,0.0,0.0,0.0
+0_speaker16_1.wav.wav,0,male,sifuri,hifuri,hifuri,1.0,0.16666666666666666,1.0,0.16666666666666666
+2_speaker21_9.wav.wav,2,female,mbili,mbili,mbili,0.0,0.0,0.0,0.0
+5_speaker12_6.wav.wav,5,male,tano,tan,tano,1.0,0.25,0.0,0.0
+9_speaker27_1.wav.wav,9,male,tisa,tisa u,tisa,1.0,0.5,0.0,0.0
+0_speaker5_7.wav.wav,0,male,sifuri,iporeng,foleni,1.0,1.0,1.0,0.8333333333333334
+3_speaker4_5.wav.wav,3,male,tatu,atu,atu,1.0,0.25,1.0,0.25
+0_speaker26_5.wav.wav,0,male,sifuri,nifule,vipuri,1.0,0.5,1.0,0.3333333333333333
+4_speaker24_9.wav.wav,4,male,nne,nume aliku,nyuma alikua,2.0,2.6666666666666665,2.0,3.6666666666666665
+2_speaker23_1.wav.wav,2,male,mbili,mbili,mbili,0.0,0.0,0.0,0.0
+0_speaker15_3.wav.wav,0,male,sifuri,ikuri,kura,1.0,0.3333333333333333,1.0,0.6666666666666666
+8_speaker22_7.wav.wav,8,male,nane,nane,nane,0.0,0.0,0.0,0.0
+6_speaker18_9.wav.wav,6,male,sita,edtad,hata,1.0,0.75,1.0,0.5
+3_speaker27_7.wav.wav,3,male,tatu,tatu,tatu,0.0,0.0,0.0,0.0
+9_speaker22_0.wav.wav,9,male,tisa,tisa,tisa,0.0,0.0,0.0,0.0
+3_speaker13_5.wav.wav,3,female,tatu,ta ya mtugu,a ya mtu,3.0,1.75,3.0,1.25
+7_speaker10_2.wav.wav,7,male,saba,saba,saba,0.0,0.0,0.0,0.0
+4_speaker4_4.wav.wav,4,male,nne,ne,nne,1.0,0.3333333333333333,0.0,0.0
+9_speaker16_9.wav.wav,9,male,tisa,isa,tisa,1.0,0.25,0.0,0.0
+8_speaker6_5.wav.wav,8,female,nane,naazi,nazi,1.0,0.75,1.0,0.5
+7_speaker29_4.wav.wav,7,female,saba,lamba,lamba,1.0,0.5,1.0,0.5
+7_speaker2_7.wav.wav,7,female,saba,taba,saba,1.0,0.25,0.0,0.0
+9_speaker14_8.wav.wav,9,female,tisa,tisa,tisa,0.0,0.0,0.0,0.0
+7_speaker20_7.wav.wav,7,female,saba,saba,saba,0.0,0.0,0.0,0.0
+8_speaker12_8.wav.wav,8,male,nane,nane,nane,0.0,0.0,0.0,0.0
+8_speaker18_9.wav.wav,8,male,nane,nane,nane,0.0,0.0,0.0,0.0
+7_speaker9_1.wav.wav,7,female,saba,ko faneni,iko kamili,2.0,2.0,2.0,2.25
+4_speaker7_7.wav.wav,4,female,nne,bungee,bunge la,1.0,1.3333333333333333,2.0,2.0
+8_speaker24_9.wav.wav,8,male,nane,nani,nani,1.0,0.25,1.0,0.25
+2_speaker13_8.wav.wav,2,female,mbili,mliru,mimi,1.0,0.6,1.0,0.4
+6_speaker17_0.wav.wav,6,male,sita,sita,sita a,0.0,0.0,1.0,0.5
+3_speaker9_6.wav.wav,3,female,tatu,ana,ana,1.0,0.75,1.0,0.75
+9_speaker25_5.wav.wav,9,male,tisa,tisa,tisa k,0.0,0.0,1.0,0.5
+5_speaker26_0.wav.wav,5,male,tano,ano,kado,1.0,0.25,1.0,0.5
+8_speaker28_9.wav.wav,8,female,nane,itema ni,tena ni,2.0,1.5,2.0,1.0
+4_speaker28_0.wav.wav,4,female,nne,le,na,1.0,0.6666666666666666,1.0,0.6666666666666666
+8_speaker22_4.wav.wav,8,male,nane,none,nane,1.0,0.25,0.0,0.0
+6_speaker28_0.wav.wav,6,female,sita,ita,it,1.0,0.25,1.0,0.5
+4_speaker30_2.wav.wav,4,male,nne,nuda kuta,muda kuwa,2.0,2.6666666666666665,2.0,3.0
+1_speaker24_8.wav.wav,1,male,moja,zowaga,za wala,1.0,1.0,2.0,1.5
+0_speaker21_5.wav.wav,0,female,sifuri,ifuri,ifuri,1.0,0.16666666666666666,1.0,0.16666666666666666
+4_speaker15_6.wav.wav,4,male,nne,nne,nne,0.0,0.0,0.0,0.0
+5_speaker26_1.wav.wav,5,male,tano,an,ana,1.0,0.5,1.0,0.5
+4_speaker11_6.wav.wav,4,male,nne,nne,nne a,0.0,0.0,1.0,0.6666666666666666
+5_speaker1_3.wav.wav,5,male,tano,tano,tano,0.0,0.0,0.0,0.0
+2_speaker29_4.wav.wav,2,female,mbili,mbili,mbili,0.0,0.0,0.0,0.0
+1_speaker26_5.wav.wav,1,male,moja,moja,moja,0.0,0.0,0.0,0.0
+8_speaker29_7.wav.wav,8,female,nane,nandi,nani,1.0,0.5,1.0,0.25
+7_speaker3_6.wav.wav,7,female,saba,na na,na na a,2.0,0.75,3.0,1.25
+5_speaker8_5.wav.wav,5,male,tano,angu,tangu,1.0,0.75,1.0,0.5
+1_speaker18_7.wav.wav,1,male,moja,moja,moja,0.0,0.0,0.0,0.0
+5_speaker25_4.wav.wav,5,male,tano,tano,tano,0.0,0.0,0.0,0.0
+7_speaker24_4.wav.wav,7,male,saba,ada,ada,1.0,0.5,1.0,0.5
+3_speaker3_6.wav.wav,3,female,tatu,awa ya fuki,hawa ya kufika,3.0,2.25,3.0,3.0
