@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-SSDD Evaluation Script with Language Model (LM) Integration.
-Compares Greedy Decoding vs. LM-Beam Search Decoding.
+Evaluates SSDD performance using standard N-gram Language Model.
+Comparison baseline for Semantic-Constrained approach.
 """
 
 import os
@@ -17,10 +17,10 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from jiwer import wer, cer
 from pyctcdecode import build_ctcdecoder
 
-# Configuration
+# Config
 ASR_MODEL_NAME = "jkhyjkhy/wav2vec2-large-xlsr-sw-ASR"
-LM_PATH = "/Users/youngheejeong/Desktop/2025 summer/Automatic speech/ASR project/Eval_dataset/language_model/5gram.bin"
-UNIGRAMS_PATH = "/Users/youngheejeong/Desktop/2025 summer/Automatic speech/ASR project/Eval_dataset/language_model/unigrams.txt"
+LM_PATH = Path("Eval_dataset/language_model/5gram.bin")
+UNIGRAMS_PATH = Path("Eval_dataset/language_model/unigrams.txt")
 TARGET_SAMPLE_RATE = 16000
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -35,38 +35,42 @@ def normalize_text(text):
     text = text.lower()
     return ' '.join(text.split())
 
-def load_models_and_decoder():
-    print(f"🚀 Loading ASR model: {ASR_MODEL_NAME}")
+def load_models():
+    print(f"Loading model: {ASR_MODEL_NAME}")
     processor = Wav2Vec2Processor.from_pretrained(ASR_MODEL_NAME)
     model = Wav2Vec2ForCTC.from_pretrained(ASR_MODEL_NAME).to(DEVICE)
     model.eval()
 
-    # Build Decoder
-    vocab_dict = processor.tokenizer.get_vocab()
-    sorted_vocab = sorted(vocab_dict.items(), key=lambda x: x[1])
-    # The model has 52 output units, but tokenizer has 54. 
-    # Use only the first 52 labels which match the CTC head.
+    # Decoder setup
+    vocab = processor.tokenizer.get_vocab()
+    sorted_vocab = sorted(vocab.items(), key=lambda x: x[1])
+    
+    # Use first 52 units to match model head
     labels = [x[0].replace("|", " ") for x in sorted_vocab[:52]]
     
-    print(f"📊 Model Vocab Size: 52 | Decoder Labels: {len(labels)}")
-    print(f"🧠 Building LM Decoder from: {LM_PATH}")
+    print(f"Building decoder with LM: {LM_PATH}")
     with open(UNIGRAMS_PATH, "r") as f:
         unigrams = [line.strip() for line in f.readlines()]
     
     decoder = build_ctcdecoder(
         labels,
-        kenlm_model_path=LM_PATH,
+        kenlm_model_path=str(LM_PATH),
         unigrams=unigrams,
     )
     return processor, model, decoder
 
-def discover_ssdd_files(root_path):
+def get_ssdd_files(root_path):
     recordings_dir = Path(root_path) / "recordings-github"
     data = []
+    if not recordings_dir.exists():
+        return pd.DataFrame(data)
+
     for speaker_dir in recordings_dir.iterdir():
         if not speaker_dir.is_dir(): continue
+        
         parts = speaker_dir.name.split('_')
         speaker_id, gender = (parts[1], parts[2]) if len(parts) >= 3 else (speaker_dir.name, "unknown")
+        
         for wav_file in speaker_dir.glob("*.wav*"):
             digit_label = wav_file.name.split('_')[0]
             if digit_label in DIGIT_MAP:
@@ -90,14 +94,14 @@ def main():
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    df = discover_ssdd_files(args.data_path)
+    df = get_ssdd_files(args.data_path)
     if args.max_samples:
         df = df.sample(min(args.max_samples, len(df)), random_state=42)
     
-    processor, model, decoder = load_models_and_decoder()
+    processor, model, decoder = load_models()
     
     results = []
-    for _, row in tqdm(df.iterrows(), total=len(df), desc="Evaluating SSDD with LM"):
+    for _, row in tqdm(df.iterrows(), total=len(df), desc="Processing"):
         try:
             speech, _ = librosa.load(row['audio_path'], sr=TARGET_SAMPLE_RATE)
             inputs = processor(speech, return_tensors="pt", sampling_rate=TARGET_SAMPLE_RATE).input_values.to(DEVICE)
@@ -105,11 +109,11 @@ def main():
             with torch.no_grad():
                 logits = model(inputs).logits[0].cpu().numpy()
             
-            # 1. Greedy Decoding
+            # Greedy
             pred_ids = np.argmax(logits, axis=-1)
             hyp_greedy = processor.decode(pred_ids)
             
-            # 2. LM-Beam Search Decoding
+            # Beam Search
             hyp_lm = decoder.decode(logits)
             
             ref = normalize_text(row['reference'])
@@ -129,30 +133,25 @@ def main():
                 'cer_lm': cer(ref, h_lm) if h_lm else 1.0
             })
         except Exception as e:
-            print(f"Error on {row['audio_id']}: {e}")
+            print(f"Failed on {row['audio_id']}: {e}")
             
     res_df = pd.DataFrame(results)
-    res_df.to_csv(output_dir / "comparison_results_ssdd.csv", index=False)
+    out_path = output_dir / "comparison_results_ssdd.csv"
+    res_df.to_csv(out_path, index=False)
     
-    # Final Comparison Summary
-    print("\n" + "="*50)
-    print("🏆 DECODING STRATEGY COMPARISON (SSDD)")
-    print("="*50)
-    print(f"Metric | Greedy | LM-Beam")
-    print("-" * 30)
-    print(f"Mean WER | {res_df['wer_greedy'].mean():.4f} | {res_df['wer_lm'].mean():.4f}")
-    print(f"Mean CER | {res_df['cer_greedy'].mean():.4f} | {res_df['cer_lm'].mean():.4f}")
-    print("="*50)
+    # Summary
+    print("\n--- Results Summary (SSDD N-gram) ---")
+    print(f"Samples: {len(res_df)}")
+    print(f"Greedy WER: {res_df['wer_greedy'].mean():.4f}")
+    print(f"KenLM WER: {res_df['wer_lm'].mean():.4f}")
     
-    # Save statistics
+    # Statistics export
     stats = {
         'greedy_wer': res_df['wer_greedy'].mean(),
         'lm_wer': res_df['wer_lm'].mean(),
-        'greedy_cer': res_df['cer_greedy'].mean(),
-        'lm_cer': res_df['cer_lm'].mean()
     }
     pd.DataFrame([stats]).to_csv(output_dir / "summary_statistics.csv", index=False)
-    print(f"\n💾 Results saved to: {output_dir}")
+    print(f"Saved to: {out_path}")
 
 if __name__ == "__main__":
     main()

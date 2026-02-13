@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-TTS Evaluation Script with Language Model (LM) Integration.
-Compares Greedy Decoding vs. LM-Beam Search Decoding on full sentences.
+Evaluates ASR performance on the Kiswahili TTS dataset using Wav2Vec2.
+Compares Greedy Decoding vs. KenLM-based Beam Search.
 """
 
 import os
@@ -17,63 +17,65 @@ from transformers import Wav2Vec2Processor, Wav2Vec2ForCTC
 from jiwer import wer, cer
 from pyctcdecode import build_ctcdecoder
 
-# Configuration
+# Config
 ASR_MODEL_NAME = "jkhyjkhy/wav2vec2-large-xlsr-sw-ASR"
-LM_PATH = "/Users/youngheejeong/Desktop/2025 summer/Automatic speech/ASR project/Eval_dataset/language_model/5gram.bin"
-UNIGRAMS_PATH = "/Users/youngheejeong/Desktop/2025 summer/Automatic speech/ASR project/Eval_dataset/language_model/unigrams.txt"
+LM_PATH = Path("Eval_dataset/language_model/5gram.bin")
+UNIGRAMS_PATH = Path("Eval_dataset/language_model/unigrams.txt")
 TARGET_SAMPLE_RATE = 16000
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# Data Paths
+# Data paths
 SCRIPT_DIR = Path(__file__).parent.absolute()
+# Allow overriding dataset root via env var or arg, but default to relative path
 DATASET_ROOT = SCRIPT_DIR / "A kiswahili Dataset for Development of Text-To-Speech System/Kiswahili Dataset"
 METADATA_PATH = DATASET_ROOT / "Text/metadata.xlsx"
 AUDIO_DIR = DATASET_ROOT / "wavs"
 
 def normalize_text(text):
     if not isinstance(text, str): return ""
+    # Remove punctuation and lowercase
     text = re.sub(r'[.,;:!?\"\'-]', ' ', text)
     text = text.lower()
     return ' '.join(text.split())
 
-def load_models_and_decoder():
-    print(f"🚀 Loading ASR model: {ASR_MODEL_NAME}")
+def load_models():
+    print(f"Loading model: {ASR_MODEL_NAME}")
     processor = Wav2Vec2Processor.from_pretrained(ASR_MODEL_NAME)
     model = Wav2Vec2ForCTC.from_pretrained(ASR_MODEL_NAME).to(DEVICE)
     model.eval()
 
-    # Build Decoder
-    vocab_dict = processor.tokenizer.get_vocab()
-    sorted_vocab = sorted(vocab_dict.items(), key=lambda x: x[1])
-    # Match the model's 52 output units
+    # Setup Decoder
+    vocab = processor.tokenizer.get_vocab()
+    sorted_vocab = sorted(vocab.items(), key=lambda x: x[1])
+    
+    # Wav2Vec2-XLSR-53 has 52 output units usually, need to match CTC head
     labels = [x[0].replace("|", " ") for x in sorted_vocab[:52]]
     
-    print(f"📊 Model Vocab Size: 52 | Decoder Labels: {len(labels)}")
-    print(f"🧠 Building LM Decoder from: {LM_PATH}")
+    print(f"Building decoder with LM: {LM_PATH.name}")
     with open(UNIGRAMS_PATH, "r") as f:
         unigrams = [line.strip() for line in f.readlines()]
     
     decoder = build_ctcdecoder(
         labels,
-        kenlm_model_path=LM_PATH,
+        kenlm_model_path=str(LM_PATH),
         unigrams=unigrams,
     )
     return processor, model, decoder
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max_samples", type=int, default=10)
+    parser.add_argument("--max_samples", type=int, default=None, help="Limit number of samples for quick testing")
     parser.add_argument("--output_dir", default="Eval_dataset/results_tts_lm")
     args = parser.parse_args()
     
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
     
-    # Load Metadata
-    print(f"📂 Loading metadata from: {METADATA_PATH}")
+    # Metadata loading
+    print(f"Reading metadata from {METADATA_PATH}")
     df_raw = pd.read_excel(METADATA_PATH)
     
-    # The excel row is one big string: "ID|transcribed|normalized"
+    # Metadata format is "ID|transcribed|normalized"
     parsed_data = []
     for _, row in df_raw.iterrows():
         line = str(row.iloc[0])
@@ -84,21 +86,20 @@ def main():
                 'normalized_text': parts[2]
             })
     
-    df_meta = pd.DataFrame(parsed_data)
-    
+    df = pd.DataFrame(parsed_data)
     if args.max_samples:
-        df_meta = df_meta.head(args.max_samples)
+        df = df.head(args.max_samples)
     
-    processor, model, decoder = load_models_and_decoder()
+    processor, model, decoder = load_models()
     
     results = []
-    for _, row in tqdm(df_meta.iterrows(), total=len(df_meta), desc="Evaluating TTS with LM"):
+    for _, row in tqdm(df.iterrows(), total=len(df), desc="Processing"):
         try:
             audio_id = str(row['audio_id'])
             audio_path = AUDIO_DIR / f"{audio_id}.wav"
             
             if not audio_path.exists():
-                print(f"⚠️ Audio not found: {audio_path}")
+                print(f"Missing file: {audio_path}")
                 continue
                 
             speech, _ = librosa.load(audio_path, sr=TARGET_SAMPLE_RATE)
@@ -107,11 +108,11 @@ def main():
             with torch.no_grad():
                 logits = model(inputs).logits[0].cpu().numpy()
             
-            # 1. Greedy Decoding
+            # Greedy
             pred_ids = np.argmax(logits, axis=-1)
             hyp_greedy = processor.decode(pred_ids)
             
-            # 2. LM-Beam Search Decoding
+            # Beam Search
             hyp_lm = decoder.decode(logits)
             
             ref = normalize_text(row['normalized_text'])
@@ -129,22 +130,18 @@ def main():
                 'cer_lm': cer(ref, h_lm) if h_lm else 1.0
             })
         except Exception as e:
-            print(f"Error on {audio_id}: {e}")
+            print(f"Failed on {audio_id}: {e}")
             
     res_df = pd.DataFrame(results)
-    res_df.to_csv(output_dir / "comparison_results_tts.csv", index=False)
+    out_path = output_dir / "comparison_results_tts.csv"
+    res_df.to_csv(out_path, index=False)
     
-    # Global Summary
-    print("\n" + "="*50)
-    print("🏆 DECODING STRATEGY COMPARISON (TTS)")
-    print("="*50)
-    print(f"Metric | Greedy | LM-Beam")
-    print("-" * 30)
-    print(f"Mean WER | {res_df['wer_greedy'].mean():.4f} | {res_df['wer_lm'].mean():.4f}")
-    print(f"Mean CER | {res_df['cer_greedy'].mean():.4f} | {res_df['cer_lm'].mean():.4f}")
-    print("="*50)
-    
-    print(f"\n💾 Results saved to: {output_dir}")
+    # Summary
+    print("\n--- Results Summary (TTS) ---")
+    print(f"Samples processed: {len(res_df)}")
+    print(f"Greedy WER: {res_df['wer_greedy'].mean():.4f} | CER: {res_df['cer_greedy'].mean():.4f}")
+    print(f"LM-Beam WER: {res_df['wer_lm'].mean():.4f} | CER: {res_df['cer_lm'].mean():.4f}")
+    print(f"Saved to: {out_path}")
 
 if __name__ == "__main__":
     main()
