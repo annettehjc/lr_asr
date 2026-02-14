@@ -1,1 +1,4 @@
 .DS_Store
+.env
+venv/
+RESEARCH_LOG_FOR_PAPER.md

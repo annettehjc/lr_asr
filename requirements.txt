@@ -1,0 +1,13 @@
+torch
+torchaudio
+transformers
+pandas
+numpy
+librosa
+tqdm
+pyctcdecode
+sentence-transformers
+jiwer
+scikit-learn
+# Note: kenlm might need to be installed manually or via: pip install https://github.com/kpu/kenlm/archive/master.zip
+https://github.com/kpu/kenlm/archive/master.zip
