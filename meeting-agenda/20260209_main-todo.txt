@@ -1,0 +1,42 @@
+MAIN TODO
+
+efficient adaptation (adrianna)
+- current approach: full fine-tuning of all model parameters & only feature extractor is frozen
+- way to improve: 
+	- LoRA/QLoRA (train only low rank adapter matrices) -> 90% reduction in trainable parameters
+	- Adapter tuning (Insert small adapter modules in transformer blocks) -> modular, reusable components
+	- Knowledge distillation (transfer knowledge from large to smaller model) -> enable edge deployment
+	- Multilingual Transfer (leverage pre-training on related Bantu languages) -> improved low-resource performace
+
+meaningful evaluation 
+- test model on a new data (Young)
+- PER/CER (hyunjoo)
+- semantic error rate (Young)
+
+responsible practice 
+
+writing up more details in the paper 
+- preprocessing (Mohamed)
+	- why we used pydub
+	- why we used that threshold 
+	- mainly backing up and reasons (very important!)
+- data description part (TBD)
+	- include more description for the data set
+	- patterns and statistics of the actual/raw data we have
+	- adding some figures 
+	- adding tables? 
+	- how we partitioned dataset
+- word2vec description (hyunjoo)
+	- model architecture
+	- explained why we chose word2vec
+	- comparison with other model 
+		- model A has this architecture, model B has this, blabla, model C is specialised here. therefore, we decided to use...
+	- specification (--> goes well with table) 
+	- pipeline 
+- training set up (TBD)
+	- parameters and such 
+- limitations (adrianna)
+	- information of the speaker is not there
+	- dialectal information is missing
+	- tones
+- future work (Mohamed)

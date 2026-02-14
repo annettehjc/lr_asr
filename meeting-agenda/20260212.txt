@@ -1,0 +1,18 @@
+TODO
+
+- Methodology (Young)
+- Experiment result (Young)
+- Limitation (adrianna)
+- Further research(bias analysis for female speakers, wav2vec 이 너무 커서 아마 small device에 넣는 부분은 조금 어려울거같다) 
+
+- Introduction & background (hyunjoo) 
+	- put them together in intro and split if necessary 
+- Abstract (mohamed)
+- Related work (hj & mohamed)
+	- Swahili Linguistic Properties: 해당 언어(교착어)의 특성과 phoneme error 문제? 그런거 우리 발표할때 조사했던 거 같은데 이거 쓰면 될거같고; ASR for Low Resource Language에 관해 공부한 논문 있으면 한두개 각주 달아서 대충 쓰면 될거같고)
+
+Right before submit
+- Using LM to check: grammar, lack of reasonings, plagiarism
+
+
+

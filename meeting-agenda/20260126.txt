@@ -1,0 +1,26 @@
+2026.1.26 meeting note
+
+TODO
+- bias analysis 
+- more evaluation than WER
+- write up more stuff on the paper 
+
+SMALLER TODO 
+- contact shaip to access the swahili data = problem: we need a business email (maybe ask mohamed for it?)
+- there's an open source data for swahili (see the links)
+- for bias: since we already have data do second small run with LoRA and compare results for peft part
+
+TO WRITE ON THE PAPER
+- research focus... (will be clarified with Younghee)
+- comparing epoch, data amount etc
+
+INSTEAD OF WER
+- Phoneme error rate (commonly used for low resource asr)
+- Semantic error rate ()
+- character error rate (dialectal data) 
+
+try new validation method using the new data set. 
+
+POSSIBLE DATASET
+https://www.openslr.org/25/
+https://www.shaip.com/offerings/open-datasets/

@@ -1,0 +1,45 @@
+- out data description part is bit too short
+	- include more description for the data set
+	- patterns and statistics of the actual/raw data we have
+	- adding some figures 
+	- adding tables? 
+	- how we partitioned dataset
+- word2vec description 
+	- model architecture
+	- explained why we chose word2vec
+	- comparison with other model 
+		- model A has this architecture, model B has this, blabla, model C is specialised here. therefore, we decided to use...
+	- specification (--> goes well with table) 
+	- pipeline 
+- preprocessing 
+	- why we used pydub
+	- why we used that threshold 
+	- mainly backing up and reasons (very important!)
+- efficient training part 
+
+YOUNG 
+other evaluation methods
+- matrix 
+test our model on the new data set 
+--> https://github.com/regak/Spoken-Swahili-Digit-Dataset
+
+limitations
+- information of the speaker is not there
+	- dialectal information is missing
+	- tones? 
+
+adding training result table
+
+Evaluation methods:
+- semantic error rate (using swahili spacy)
+- phonetic error rate --> hyunjoo 
+
+efficient adaptation part --> adrianna 
+preprocessing (whys) --> mohamed
+word2vec description --> hyunjoo 
+training set up description --> training set up 
+evaluation (when error rates are done, add up your down work)
+challenges & limitations --> adrianna
+future work --> mohamed 
+
+if anyone is done with the work earlier, please add the dataset description as well (like raw data character/statistic reviews)
